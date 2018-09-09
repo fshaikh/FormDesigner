@@ -1,0 +1,39 @@
+{
+  "name": "@reversecurrent/formdesigner",
+  "version": "0.1.0",
+  "private": false,
+  "main": "dist/FormDesigner/FormDesigner.js",
+  "dependencies": {
+    "prop-types": "^15.6.2"
+  },
+  "peerDependencies": {
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-scripts build",
+    "build-lib": "rimraf dist && cross-env NODE_ENV=production && npm run build-babel && npm runn packagejson ",
+    "build-babel": "babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "packagejson": "cpx package*.json ./dist"
+  },
+  "devDependencies": {
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
+    "react-scripts": "1.1.5",
+    "react-test-renderer": "^16.5.0",
+    "babel-cli": "^6.26.0",
+    "cross-env": "^5.2.0",
+    "node-sass": "^4.9.3",
+    "react-app-rewire-css-modules": "github:codebandits/react-app-rewire-css-modules",
+    "react-app-rewired": "^1.6.2",
+    "rimraf": "^2.6.2",
+    "sass-loader": "^7.1.0"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
+}

@@ -1,0 +1,18 @@
+.formDesigner {
+    display: grid;
+    grid-template-rows: 10% auto 10%;
+    width: inherit;
+    height: inherit;
+}
+
+.fdBar{
+    border: 1px solid black;
+}
+
+.fdMain {
+    border: 1px solid blue;
+}
+
+.fdFooter {
+    border: 1px solid green;
+}
