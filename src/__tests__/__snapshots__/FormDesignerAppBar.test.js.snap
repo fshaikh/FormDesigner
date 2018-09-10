@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form Designer App Bar component snapshot tests should render correctly 1`] = `
+<div>
+  <header
+    className="MuiPaper-root-010 MuiPaper-elevation4-016 MuiAppBar-root-01 MuiAppBar-positionStatic-05 MuiAppBar-colorPrimary-08"
+  >
+    <div
+      className="MuiToolbar-root-037 MuiToolbar-regular-039 MuiToolbar-gutters-038"
+    >
+      <h2
+        className="MuiTypography-root-041 MuiTypography-title-047 MuiTypography-colorInherit-060"
+      >
+        <div
+          aria-describedby={undefined}
+          className="MuiFormControl-root-066"
+        >
+          <div
+            className="MuiInput-root-070 MuiInput-formControl-071 MuiInput-underline-074"
+          >
+            <input
+              aria-invalid={false}
+              autoComplete={undefined}
+              autoFocus={undefined}
+              className="MuiInput-input-078"
+              defaultValue="New Form"
+              disabled={false}
+              id={undefined}
+              name={undefined}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              onKeyDown={undefined}
+              onKeyUp={undefined}
+              placeholder="Enter form name here"
+              readOnly={undefined}
+              required={false}
+              rows={undefined}
+              type="text"
+              value={undefined}
+            />
+          </div>
+        </div>
+      </h2>
+    </div>
+  </header>
+</div>
+`;

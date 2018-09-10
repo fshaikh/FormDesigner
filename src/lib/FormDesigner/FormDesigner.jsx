@@ -1,7 +1,20 @@
+/**
+ * React specific imports
+ */
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// Import css using CSS modules
+/**
+ * Lib specific imports
+ */
+import FormDesignerContext from './Store/FormDesignerContext';
+import EventEmitter from '../../../node_modules/@reversecurrent/eventemitter/EventEmitter'
+import * as Actions from './Actions/Actions';
+import Strings from './Strings/strings-en';
+import FormDesignerAppBar from './FDBar/FormDesignerAppBar';
+/**
+ * Import css using CSS modules
+ */
 import styles from './FormDesigner.module.css';
 
 /**
@@ -14,6 +27,30 @@ export default class FormDesigner extends React.Component {
      */
     constructor(props)  {
         super(props);
+
+        // derive state from props
+        this.state = Object.assign({}, props);
+
+        // create event emitter and bind event handlers
+        this.setupDispatcher();
+        // bind event handlers
+        this.bindEventHandlers();
+        
+    }
+
+    /**
+     * Sets up dispatchers.
+     */
+    setupDispatcher() {
+        this.eventEmitter = new EventEmitter('Form Designer');
+        this.eventEmitter.on(Actions.FormNameChange, this.onFormNameChange);
+    }
+
+    /**
+     * Bind event handlers
+     */
+    bindEventHandlers() {
+        this.onFormNameChange = this.onFormNameChange.bind(this);
     }
 
     /**
@@ -72,19 +109,42 @@ export default class FormDesigner extends React.Component {
      * React invokes this function to render the component's UI
      */
     render() {
+        const context = this.getContext();
+
         return (
-            <div className={styles.formDesigner}>
-                <div className={styles.fdBar}>
-                    App Bar goes here
+            <FormDesignerContext.Provider value={context}>  
+                <div className={styles.formDesigner}>
+                    <div className={styles.fdBar}>
+                        <FormDesignerAppBar />
+                    </div>
+                    <div className={styles.fdMain}>
+                        FD Main goes here
+                    </div>
+                    <div className={styles.fdFooter}>
+                        FD Footer goes here
+                    </div>
                 </div>
-                <div className={styles.fdMain}>
-                    FD Main goes here
-                </div>
-                <div className={styles.fdFooter}>
-                    FD Footer goes here
-                </div>
-            </div>
+            </FormDesignerContext.Provider>
         );
+    }
+
+    /**
+     * Reducer function invoked when onFormNameChange action is dispatched
+     * @param {*string} name - Form name
+     */
+    onFormNameChange(name) {
+        console.log(name);
+    }
+
+    /**
+     * Creates Form Designer context object
+     */
+    getContext() {
+        return {
+            formDefinition : this.state.formDefinition,
+            eventEmitter: this.eventEmitter,
+            strings: Strings
+        };
     }
 
 }

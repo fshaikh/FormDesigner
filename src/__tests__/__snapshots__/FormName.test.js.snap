@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form Name component snapshot tests should render correctly 1`] = `
+<div
+  aria-describedby={undefined}
+  className="MuiFormControl-root-01"
+>
+  <div
+    className="MuiInput-root-05 MuiInput-formControl-06 MuiInput-underline-09"
+  >
+    <input
+      aria-invalid={false}
+      autoComplete={undefined}
+      autoFocus={undefined}
+      className="MuiInput-input-013"
+      defaultValue="New Form"
+      disabled={false}
+      id={undefined}
+      name={undefined}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      onKeyDown={undefined}
+      onKeyUp={undefined}
+      placeholder="Enter form name here"
+      readOnly={undefined}
+      required={false}
+      rows={undefined}
+      type="text"
+      value={undefined}
+    />
+  </div>
+</div>
+`;
