@@ -44,6 +44,8 @@ export default class FormDesigner extends React.Component {
     setupDispatcher() {
         this.eventEmitter = new EventEmitter('Form Designer');
         this.eventEmitter.on(Actions.FormNameChange, this.onFormNameChange);
+        this.eventEmitter.on(Actions.AddRow, this.addRow);
+        this.eventEmitter.on(Actions.Save, this.onSave);
     }
 
     /**
@@ -51,6 +53,8 @@ export default class FormDesigner extends React.Component {
      */
     bindEventHandlers() {
         this.onFormNameChange = this.onFormNameChange.bind(this);
+        this.addRow = this.addRow.bind(this);
+        this.onSave = this.onSave.bind(this);
     }
 
     /**
@@ -134,6 +138,22 @@ export default class FormDesigner extends React.Component {
      */
     onFormNameChange(name) {
         console.log(name);
+    }
+
+    /**
+     * Reducer function invoked when a addRow action is dispatched
+     * @param {*} event 
+     */
+    addRow(event) {
+        console.log('add row')
+    }
+
+    /**
+     * Reducer function invoked when a onSave action is dispatched
+     * @param {*} event 
+     */
+    onSave(event) {
+        console.log('on save')
     }
 
     /**

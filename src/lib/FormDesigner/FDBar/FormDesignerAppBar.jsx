@@ -8,13 +8,13 @@ import React from 'react';
  */
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-// import MenuIcon from '@material-ui/icons/Menu';
+
 
 /**
  * Library specific imports
  */
 import FormName from './FormName/FormName';
+import ActionBar from './ActionBar/ActionBar';
 
 /**
  * Presentation coponent which implements the Top Bar for the Form Designer
@@ -25,9 +25,8 @@ const FormDesignerAppBar = (props) => {
         <div>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography variant="title" color="inherit">
-                        <FormName />
-                    </Typography>
+                    <FormName />
+                    <ActionBar />
                 </Toolbar>
             </AppBar>
         </div>
