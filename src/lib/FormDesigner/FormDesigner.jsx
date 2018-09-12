@@ -12,6 +12,10 @@ import EventEmitter from '../../../node_modules/@reversecurrent/eventemitter/Eve
 import * as Actions from './Actions/Actions';
 import Strings from './Strings/strings-en';
 import FormDesignerAppBar from './FDBar/FormDesignerAppBar';
+import FormDesignerCenterContent from './FDCenterContent/FormDesignerCenterContent';
+import * as IdService from './Common/Services/IdService';
+import * as FieldFactory from './Store/FieldFactory';
+
 /**
  * Import css using CSS modules
  */
@@ -31,11 +35,23 @@ export default class FormDesigner extends React.Component {
         // derive state from props
         this.state = Object.assign({}, props);
 
-        // create event emitter and bind event handlers
-        this.setupDispatcher();
         // bind event handlers
         this.bindEventHandlers();
+        // create event emitter and bind event handlers
+        this.setupDispatcher();
         
+        
+    }
+
+    /**
+     * Bind event handlers
+     */
+    bindEventHandlers() {
+        this.onFormNameChange = this.onFormNameChange.bind(this);
+        this.addRow = this.addRow.bind(this);
+        this.onSave = this.onSave.bind(this);
+        this.onAddControl = this.onAddControl.bind(this);
+        this.onSelectControl = this.onSelectControl.bind(this);
     }
 
     /**
@@ -46,16 +62,11 @@ export default class FormDesigner extends React.Component {
         this.eventEmitter.on(Actions.FormNameChange, this.onFormNameChange);
         this.eventEmitter.on(Actions.AddRow, this.addRow);
         this.eventEmitter.on(Actions.Save, this.onSave);
+        this.eventEmitter.on(Actions.AddControl, this.onAddControl);
+        this.eventEmitter.on(Actions.SelectControl, this.onSelectControl);
     }
 
-    /**
-     * Bind event handlers
-     */
-    bindEventHandlers() {
-        this.onFormNameChange = this.onFormNameChange.bind(this);
-        this.addRow = this.addRow.bind(this);
-        this.onSave = this.onSave.bind(this);
-    }
+    
 
     /**
      * Prop types for Form Designer component
@@ -122,7 +133,7 @@ export default class FormDesigner extends React.Component {
                         <FormDesignerAppBar />
                     </div>
                     <div className={styles.fdMain}>
-                        FD Main goes here
+                        <FormDesignerCenterContent />
                     </div>
                     <div className={styles.fdFooter}>
                         FD Footer goes here
@@ -145,7 +156,16 @@ export default class FormDesigner extends React.Component {
      * @param {*} event 
      */
     addRow(event) {
-        console.log('add row')
+        this.setState((prevState) => {
+            var rows = prevState.formDefinition.rows == null ? {} : prevState.formDefinition.rows;
+            return {
+                formDefinition: Object.assign(
+                                              {},
+                                              prevState.formDefinition,
+                                              {rows: Object.assign({}, {...rows},this.getNewRow())}
+                                            )
+            };
+        });
     }
 
     /**
@@ -153,7 +173,35 @@ export default class FormDesigner extends React.Component {
      * @param {*} event 
      */
     onSave(event) {
-        console.log('on save')
+        console.log(this.state);
+    }
+
+    /**
+     * Reducer function invoked when a onAddField action is dispatched
+     * @param {*Row} row - Row to which the field has been added
+     * @param {*} field - Control to be added to the row in the form
+     */
+    onAddControl({row, control}) {
+        // Construct a new field/widget object based on the type
+        const newControlField = this.getNewControl(control);
+        // set state
+        this.setState((prevState) => {
+            var existingRow = prevState.formDefinition.rows[row.id];
+            
+            var controls = Object.assign({}, {...existingRow.fields}, newControlField);
+            var clonedRow = Object.assign({}, existingRow,{fields: controls});
+            return {
+                formDefinition: Object.assign(
+                                              {},
+                                              prevState.formDefinition,
+                                              {rows: Object.assign({}, {...prevState.formDefinition.rows},{[row.id]: clonedRow})}
+                                            )
+            };
+        });
+    }
+
+    onSelectControl({row, control}) {
+        console.log(control)
     }
 
     /**
@@ -164,6 +212,28 @@ export default class FormDesigner extends React.Component {
             formDefinition : this.state.formDefinition,
             eventEmitter: this.eventEmitter,
             strings: Strings
+        };
+    }
+
+    /**
+     * Creates a new row object to be added to form definition
+     */
+    getNewRow() {
+        // Get the unique rowid
+        const rowId = IdService.getUniqueId();
+        return {
+            [rowId]: {
+                id: rowId,
+                fields:{}
+            }
+        };
+    }
+
+    getNewControl(control) {
+        const fieldId = IdService.getUniqueId();
+        let newControlValues = FieldFactory.getControlSeed(control)
+        return {
+            [fieldId] : {systemId:fieldId, ...newControlValues}
         };
     }
 

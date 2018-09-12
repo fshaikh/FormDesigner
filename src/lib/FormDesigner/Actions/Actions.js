@@ -24,3 +24,25 @@ export const SaveAction = (event) => {
         payload: event
     };
 }
+
+export const AddControl = 'onAddControl';
+export const AddControlAction = (row, control) => {
+    return {
+        actionName: AddControl,
+        payload: {
+            row: row,
+            control: control
+        }
+    };
+};
+
+export const SelectControl = 'onSelectControl';
+export const SelectControlAction = (row, control) => {
+    return {
+        actionName: SelectControl,
+        payload: {
+            row: row,
+            control: control
+        }
+    };
+}

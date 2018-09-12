@@ -7,7 +7,8 @@
     "@material-ui/core": "^3.0.3",
     "@material-ui/icons": "^3.0.1",
     "@reversecurrent/eventemitter": "^1.1.0",
-    "prop-types": "^15.6.2"
+    "prop-types": "^15.6.2",
+    "uuid": "^3.3.2"
   },
   "peerDependencies": {
     "react": "^16.5.0",
