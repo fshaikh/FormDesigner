@@ -23,7 +23,7 @@ const FormName = () => {
     return (
         <FormDesignerContext.Consumer>
             { (context) => { 
-                return <TextField defaultValue={context.formDefinition.formName}
+                return <TextField defaultValue={context.state.formDefinition.formName}
                               placeholder={context.strings.FormNamePlaceholder}
                               onChange={(event) => context.eventEmitter.dispatch(Actions.FormNameChangeAction(event.target.value))}     
                         />  

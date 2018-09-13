@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './FormDesignerCenterContent.module.css';
 import FormDesignerSideBar from './SideBar/FormDesignerSideBar';
 import DesignerSurface from './DesignerSurface/DesignerSurface'
+import FormDesignerRightBar from './RightBar/FormDesignerRightBar';
 
 const FormDesignerCenterContent = (props) => {
     return (
@@ -14,7 +15,7 @@ const FormDesignerCenterContent = (props) => {
                 <DesignerSurface />
             </div>
             <div>
-                Field Properties 
+                <FormDesignerRightBar /> 
             </div>
         </div>
     );

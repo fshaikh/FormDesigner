@@ -18,7 +18,7 @@ const FieldsPlaceholder = ({row , fields}) => {
     );
 };
 
-Field.propTypes = {
+FieldsPlaceholder.propTypes = {
     row: PropTypes.object.isRequired,
     fields: PropTypes.object.isRequired
 };

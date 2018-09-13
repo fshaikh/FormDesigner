@@ -45,4 +45,27 @@ export const SelectControlAction = (row, control) => {
             control: control
         }
     };
+};
+
+export const PropertyChange = 'onPropertyChangel';
+export const PropertyChangeAction = (row, control, value, name) => {
+    return {
+        actionName: PropertyChange,
+        payload: {
+            row: row,
+            control: control,
+            value: value,
+            name: name
+        }
+    };
+};
+
+export const DeleteRow = 'onDeleteRow';
+export const DeleteRowAction = (row) => {
+    return {
+        actionName: DeleteRow,
+        payload: {
+            row: row
+        }
+    };
 }

@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import styles from './Row.module.css';
 import Field from './Field/Field'
 import EmptyRowView from './EmptyRowView';
-import FieldsPlaceholder from './Field/FieldsPlaceholder'
+import FieldsPlaceholder from './Field/FieldsPlaceholder';
+import IconedButton from '../../../Common/Components/IconButton/IconedButton';
 
-const Row = ({row, onControlAdded}) => {
+const Row = ({row, onControlAdded , onRowDeleted}) => {
     return (
         <Paper elevation={1} className={styles.row}
                onDragOver={(event)=> handleDragOver(event , row)}
@@ -17,10 +19,16 @@ const Row = ({row, onControlAdded}) => {
                onDrop={(event) =>   handleOnDrop(event, row, onControlAdded) }               
                draggable="true">
             { 
+                
                 isRowEmpty(row)? 
                     <EmptyRowView /> :
                     <FieldsPlaceholder row={row} fields={row.fields} />
             }
+            <IconedButton className={styles.delete}
+                        onClick={(event) => {onRowDeleted(event, row)}}
+                        label="Delete" >
+                <DeleteIcon/>
+            </IconedButton>
         </Paper>
     );
 };

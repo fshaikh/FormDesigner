@@ -33,14 +33,30 @@ export default class FormDesigner extends React.Component {
         super(props);
 
         // derive state from props
-        this.state = Object.assign({}, props);
-
+        this.setStateFromProps(props);
         // bind event handlers
         this.bindEventHandlers();
         // create event emitter and bind event handlers
         this.setupDispatcher();
-        
-        
+    }
+
+    /**
+     * Set component state derived from props and additional properties
+     * @param {*} props 
+     */
+    setStateFromProps(props) {
+        this.state = Object.assign(
+                                    {},
+                                    props,
+                                    {
+                                        selection:{
+                                                    select: false, 
+                                                    id:'',
+                                                    rowId:'',
+                                                    getSelectedControl: this.getSelectedControl.bind(this)
+                                                  }
+                                    });
+        this.rowIndex = 0;
     }
 
     /**
@@ -52,18 +68,22 @@ export default class FormDesigner extends React.Component {
         this.onSave = this.onSave.bind(this);
         this.onAddControl = this.onAddControl.bind(this);
         this.onSelectControl = this.onSelectControl.bind(this);
+        this.onPropertyChange = this.onPropertyChange.bind(this);
+        this.onDeleteRow = this.onDeleteRow.bind(this);
     }
 
     /**
      * Sets up dispatchers.
      */
     setupDispatcher() {
-        this.eventEmitter = new EventEmitter('Form Designer');
+        this.eventEmitter = new EventEmitter('Form Designer',true);
         this.eventEmitter.on(Actions.FormNameChange, this.onFormNameChange);
         this.eventEmitter.on(Actions.AddRow, this.addRow);
         this.eventEmitter.on(Actions.Save, this.onSave);
         this.eventEmitter.on(Actions.AddControl, this.onAddControl);
         this.eventEmitter.on(Actions.SelectControl, this.onSelectControl);
+        this.eventEmitter.on(Actions.PropertyChange, this.onPropertyChange);
+        this.eventEmitter.on(Actions.DeleteRow, this.onDeleteRow);
     }
 
     
@@ -187,7 +207,6 @@ export default class FormDesigner extends React.Component {
         // set state
         this.setState((prevState) => {
             var existingRow = prevState.formDefinition.rows[row.id];
-            
             var controls = Object.assign({}, {...existingRow.fields}, newControlField);
             var clonedRow = Object.assign({}, existingRow,{fields: controls});
             return {
@@ -200,8 +219,64 @@ export default class FormDesigner extends React.Component {
         });
     }
 
+    /**
+     * Reducer function invoked when a onSelectControl action is dispatched
+     * @param {*} param0 
+     */
     onSelectControl({row, control}) {
-        console.log(control)
+        // {selection:{select: false, id:''}}
+        this.setState((prevState) => {
+            const select = {select: true, id: control.systemId, rowId: row.id};
+            console.log(select)
+            return {
+                selection: Object.assign({}, prevState.selection,select)
+            }
+        });
+    }
+
+    /**
+     * Reducer function invoked when a onPropertyChange action is dispatched
+     * @param {*} param0 
+     */
+    onPropertyChange({row,control,value,name}) {
+        this.setState((prevState) => {
+            // get the field first from the state
+            var stateField = prevState.formDefinition.rows[row].fields[control.systemId];
+            var newControlField = Object.assign({}, stateField, {[name]: value});
+            var existingRow = prevState.formDefinition.rows[row];
+            var controls = Object.assign({}, {...existingRow.fields}, {[stateField.systemId]: newControlField});
+            var clonedRow = Object.assign({}, existingRow,{fields: controls});
+            return {
+                formDefinition: Object.assign(
+                                              {},
+                                              prevState.formDefinition,
+                                              {rows: Object.assign({}, {...prevState.formDefinition.rows},{[row]: clonedRow})}
+                                            )
+            };
+        });
+    }
+
+    /**
+     * Reducer function invoked when a row delete action is dispatched
+     * @param {*} row - Row to be deleted 
+     */
+    onDeleteRow({row}) {
+        this.setState((prevState) => {
+            const rows = prevState.formDefinition.rows;
+            var filteredRows = Object.keys(rows)
+                                     .filter( rowId => rowId !== row.id)
+                                     .reduce((accumulator,rowId) => {
+                                         accumulator[rowId] = rows[rowId]
+                                         return accumulator;
+                                     },{});
+            return {
+                formDefinition: Object.assign(
+                                              {},
+                                              prevState.formDefinition,
+                                              {rows: Object.assign({}, {...filteredRows})}
+                                            )
+            };
+        });
     }
 
     /**
@@ -209,7 +284,7 @@ export default class FormDesigner extends React.Component {
      */
     getContext() {
         return {
-            formDefinition : this.state.formDefinition,
+            state : this.state,
             eventEmitter: this.eventEmitter,
             strings: Strings
         };
@@ -224,6 +299,7 @@ export default class FormDesigner extends React.Component {
         return {
             [rowId]: {
                 id: rowId,
+                index: this.rowIndex++,
                 fields:{}
             }
         };
@@ -237,4 +313,11 @@ export default class FormDesigner extends React.Component {
         };
     }
 
+    getSelectedControl() {
+        const selection = this.state.selection;
+        const rows = this.state.formDefinition.rows;
+        return selection.id === '' ?
+                      null :
+                      rows[selection.rowId] == null ? null : rows[selection.rowId].fields[selection.id]
+    }
 }

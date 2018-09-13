@@ -12,7 +12,10 @@ const Strings = {
     File: 'File',
     Dropdown: 'Drop down',
     Checkbox: 'Checkbox',
-    Radio: 'Radio'
+    Radio: 'Radio',
+    Common: 'Common',
+    Advanced: 'Advanced',
+    Validators: 'Validators'
 
 };
 

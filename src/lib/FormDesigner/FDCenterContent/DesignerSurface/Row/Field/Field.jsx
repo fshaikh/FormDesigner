@@ -11,11 +11,13 @@ import FormDesignerContext from '../../../../Store/FormDesignerContext';
 import * as Actions from '../../../../Actions/Actions'
 
 const Field = ({row, field}) => {
+    
     return (
         <FormDesignerContext.Consumer>
             {(context) => {
+                const classes = [styles.field, context.state.selection.id === field.systemId ? styles.selected: styles.normal].join(' ');
                 return (
-                    <Paper className={styles.field}
+                    <Paper className={classes}
                            onClick={(event) => context.eventEmitter.dispatch(Actions.SelectControlAction(row, field))}>
                         {React.createElement(fieldIconMapping[field.type])}
                         <span>{field.label}</span>
