@@ -21,7 +21,7 @@ export default class TabbedContainer extends React.Component {
     render() {
         return (
             <div>
-                <AppBar position="static">
+                <AppBar position="static" color="default">
                     <Tabs value={this.state.currentTab}
                         onChange={this.handleTabChange}>
                             {this.props.tabs.map((tab) => {

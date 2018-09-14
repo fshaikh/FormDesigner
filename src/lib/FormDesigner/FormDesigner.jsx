@@ -155,12 +155,9 @@ export default class FormDesigner extends React.Component {
         return (
             <FormDesignerContext.Provider value={context}>  
                 <div className={styles.formDesigner}>
-                    <div className={styles.fdBar}>
                         <FormDesignerAppBar />
-                    </div>
-                    <div className={styles.fdMain}>
                         <FormDesignerCenterContent />
-                    </div>
+                  
                     <div className={styles.fdFooter}>
                         FD Footer goes here
                     </div>

@@ -15,8 +15,8 @@ import CellControl from './CellControl';
 const PropertyPane = (props) => {
     const CustomTableCell = withStyles(theme => ({
         head: {
-          backgroundColor: theme.palette.common.black,
-          color: theme.palette.common.white,
+          backgroundColor: '#f5f5f5',
+          color: theme.palette.common.black,
         },
         body: {
           fontSize: 14,

@@ -16,7 +16,7 @@ export default class DesignerSurface extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className={styles.designerSurface}>
                 <FormDesignerContext.Consumer>
                     { (context) => {
                             this.context = context;

@@ -6,6 +6,8 @@ const Strings = {
     AddRow: 'Add Row',
     Save: 'Save',
     EditFormProperties: 'Edit Form Properties',
+    Preview: 'Preview Form',
+    Publish: 'Publish Form',
     ShortText: 'Short Text',
     LongText: 'Long Text',
     Email: 'Email',

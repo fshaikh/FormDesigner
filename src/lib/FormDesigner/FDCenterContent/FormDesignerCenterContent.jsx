@@ -8,15 +8,9 @@ import FormDesignerRightBar from './RightBar/FormDesignerRightBar';
 const FormDesignerCenterContent = (props) => {
     return (
         <div className={styles.fdCenterContentContainer}>
-            <div>
                 <FormDesignerSideBar /> 
-            </div>
-            <div>
                 <DesignerSurface />
-            </div>
-            <div>
                 <FormDesignerRightBar /> 
-            </div>
         </div>
     );
 };

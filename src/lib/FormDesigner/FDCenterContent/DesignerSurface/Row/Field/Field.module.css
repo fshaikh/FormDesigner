@@ -5,8 +5,8 @@
 }
 
 .selected {
-    background-color: black !important;
-    color: white;
+    composes: themeColor from '../../../../Styles/_color.css';
+    color: black;
 }
 
 .normal {

@@ -8,12 +8,12 @@
     "@material-ui/icons": "^3.0.1",
     "@reversecurrent/eventemitter": "^1.4.0",
     "@reversecurrent/react-form-meta": "^2.0.0",
-    "prop-types": "^15.6.2",
     "uuid": "^3.3.2"
   },
   "peerDependencies": {
     "react": "^16.5.0",
-    "react-dom": "^16.5.0"
+    "react-dom": "^16.5.0",
+    "prop-types": "^15.6.2"
   },
   "scripts": {
     "start": "react-app-rewired start",
