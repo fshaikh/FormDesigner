@@ -25,6 +25,25 @@ export const SaveAction = (event) => {
     };
 }
 
+export const ShowEditFormProperties = 'ShowEditFormProperties';
+export const ShowEditFormPropertiesAction = (event) => {
+    return {
+        actionName: ShowEditFormProperties,
+        payload: event
+    };
+}
+
+export const EditFormProperties = 'EditFormProperties';
+export const EditFormPropertiesAction = (formData, isCancel) => {
+    return {
+        actionName: EditFormProperties,
+        payload: {
+            formData,
+            isCancel
+        }
+    };
+}
+
 export const AddControl = 'onAddControl';
 export const AddControlAction = (row, control) => {
     return {

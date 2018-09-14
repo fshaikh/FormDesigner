@@ -5,6 +5,7 @@ const Strings = {
     FormNamePlaceholder: 'Enter form name here',
     AddRow: 'Add Row',
     Save: 'Save',
+    EditFormProperties: 'Edit Form Properties',
     ShortText: 'Short Text',
     LongText: 'Long Text',
     Email: 'Email',
@@ -15,7 +16,18 @@ const Strings = {
     Radio: 'Radio',
     Common: 'Common',
     Advanced: 'Advanced',
-    Validators: 'Validators'
+    Validators: 'Validators',
+    EditFormPropertiesTitle: 'Edit Form Properties',
+    EditFormPropertiesTitleField: 'Title',
+    EditFormPropertiesDescription: 'Description',
+    EditFormPropertiesRootIdPrefix:'RootIdPrefix',
+    EditFormPropertiesAutoComplete: 'Auto Complete',
+    Id: 'Id',
+    Name: 'Name',
+    ClassNames: 'Class Name(s)',
+    ClassNamesHintText: 'Separate the class names by a space',
+    SaveAndClose: 'Save and Close',
+    Cancel: 'Cancel'
 
 };
 

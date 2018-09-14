@@ -1,12 +1,12 @@
 const FieldControlsEnum = {
-    ShortText: 'shortText',
-    LongText: 'longText',
-    Email: 'email',
-    Number: 'number',
-    Dropdown: 'dropDown',
-    Radio: 'radio',
-    Checkbox: 'checkBox',
-    File: 'file'
+    ShortText: 'ShortText',
+    LongText: 'LongText',
+    Email: 'Email',
+    Number: 'Number',
+    Dropdown: 'DropDown',
+    Radio: 'Radio',
+    Checkbox: 'CheckBox',
+    File: 'File'
 };
 
 export default FieldControlsEnum;

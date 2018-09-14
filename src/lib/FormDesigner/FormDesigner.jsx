@@ -15,6 +15,7 @@ import FormDesignerAppBar from './FDBar/FormDesignerAppBar';
 import FormDesignerCenterContent from './FDCenterContent/FormDesignerCenterContent';
 import * as IdService from './Common/Services/IdService';
 import * as FieldFactory from './Store/FieldFactory';
+import EditFormProperties from './Common/Components/Dialog/EditFormProperties/EditFormProperties';
 
 /**
  * Import css using CSS modules
@@ -54,7 +55,8 @@ export default class FormDesigner extends React.Component {
                                                     id:'',
                                                     rowId:'',
                                                     getSelectedControl: this.getSelectedControl.bind(this)
-                                                  }
+                                                  },
+                                        showEditForm: false
                                     });
         this.rowIndex = 0;
     }
@@ -66,10 +68,12 @@ export default class FormDesigner extends React.Component {
         this.onFormNameChange = this.onFormNameChange.bind(this);
         this.addRow = this.addRow.bind(this);
         this.onSave = this.onSave.bind(this);
+        this.showEditFormProperties = this.showEditFormProperties.bind(this);
         this.onAddControl = this.onAddControl.bind(this);
         this.onSelectControl = this.onSelectControl.bind(this);
         this.onPropertyChange = this.onPropertyChange.bind(this);
         this.onDeleteRow = this.onDeleteRow.bind(this);
+        this.onEditFormProperties = this.onEditFormProperties.bind(this);
     }
 
     /**
@@ -80,10 +84,12 @@ export default class FormDesigner extends React.Component {
         this.eventEmitter.on(Actions.FormNameChange, this.onFormNameChange);
         this.eventEmitter.on(Actions.AddRow, this.addRow);
         this.eventEmitter.on(Actions.Save, this.onSave);
+        this.eventEmitter.on(Actions.ShowEditFormProperties, this.showEditFormProperties);
         this.eventEmitter.on(Actions.AddControl, this.onAddControl);
         this.eventEmitter.on(Actions.SelectControl, this.onSelectControl);
         this.eventEmitter.on(Actions.PropertyChange, this.onPropertyChange);
         this.eventEmitter.on(Actions.DeleteRow, this.onDeleteRow);
+        this.eventEmitter.on(Actions.EditFormProperties, this.onEditFormProperties);
     }
 
     
@@ -158,6 +164,10 @@ export default class FormDesigner extends React.Component {
                     <div className={styles.fdFooter}>
                         FD Footer goes here
                     </div>
+                    <EditFormProperties open={this.state.showEditForm}
+                                        formData={this.state.formDefinition.formProperties}
+                                        showFullScreen ={true}
+                                        onEditFormProperties={this.onEditFormProperties}/>
                 </div>
             </FormDesignerContext.Provider>
         );
@@ -194,6 +204,14 @@ export default class FormDesigner extends React.Component {
      */
     onSave(event) {
         console.log(this.state);
+    }
+
+    /**
+     * Reducer function invoked when a onEditFormProperties action is dispatched
+     * @param {*} event 
+     */
+    showEditFormProperties(event) {
+        this.setState({showEditForm: true});
     }
 
     /**
@@ -275,6 +293,27 @@ export default class FormDesigner extends React.Component {
                                               prevState.formDefinition,
                                               {rows: Object.assign({}, {...filteredRows})}
                                             )
+            };
+        });
+    }
+
+    /**
+     * Event handler when form properties are saved by the user
+     * @param {*} formProperties 
+     */
+    onEditFormProperties({formData,isCancel}) {
+        if(isCancel){
+            this.setState({showEditForm: false});
+            return;
+        }
+        this.setState((prevState) => {
+            return {
+                formDefinition: Object.assign(
+                                              {},
+                                              prevState.formDefinition,
+                                              {formProperties: Object.assign({}, formData)}
+                                            ),
+                showEditForm: false
             };
         });
     }

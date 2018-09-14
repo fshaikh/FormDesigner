@@ -26,6 +26,9 @@ const ActionBar = (props) => {
                             <ActionButton type="save"
                                           title={context.strings.Save}
                                           action = {Actions.SaveAction}/>
+                            <ActionButton type="EditFormProperties"
+                                          title={context.strings.EditFormProperties}
+                                          action = {Actions.ShowEditFormPropertiesAction}/>
                         </React.Fragment> 
             }}
         </FormDesignerContext.Consumer>   
