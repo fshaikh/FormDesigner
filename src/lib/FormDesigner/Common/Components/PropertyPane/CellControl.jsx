@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import TextField from '@material-ui/core/TextField';
-import FieldControlsEnum from '../../../Common/Models/FieldControlsEnum';
+import SystemTypes from '../../../Common/Models/SystemTypes';
 import Checkbox from '@material-ui/core/Checkbox';
+import ArrayField from '../ArrayField/ArrayField'
 
 const CellControl = (props) => {
      var Control = getControl(props);
@@ -13,8 +14,22 @@ const CellControl = (props) => {
 };
 
 const getControl = (props) => {
-        return <TextField defaultValue={props.value}
-                              onChange={(event) => props.onPropertyChange(event.target.value)} />;
+        const InputField = <TextField defaultValue={props.value}
+                                      onChange={(event) => props.onPropertyChange(event.target.value)}
+                                      type={props.type === SystemTypes.string ? 'text' : 'number'} />
+        switch(props.type) {
+            case SystemTypes.string:
+                return InputField;
+            case SystemTypes.boolean:
+                return <Checkbox checked={props.value}
+                                 onChange={(event) => props.onPropertyChange(event.target.checked)} />
+            case SystemTypes.array:
+                return <ArrayField values={props.value} 
+                                   onChange={(values) => props.onPropertyChange(values)}/>
+            default:
+                return InputField;
+        }
+        
 
 }
 
@@ -22,7 +37,8 @@ CellControl.propTypes = {
     value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.bool,
-        PropTypes.number
+        PropTypes.number,
+        PropTypes.array
     ]).isRequired,
     type: PropTypes.string.isRequired,
     onPropertyChange: PropTypes.func.isRequired

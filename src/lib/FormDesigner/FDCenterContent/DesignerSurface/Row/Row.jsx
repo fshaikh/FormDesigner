@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import styles from './Row.module.css';
-import Field from './Field/Field'
 import EmptyRowView from './EmptyRowView';
 import FieldsPlaceholder from './Field/FieldsPlaceholder';
 import IconedButton from '../../../Common/Components/IconButton/IconedButton';
@@ -61,7 +59,6 @@ const handleOnDrop = (event, row, onControlAdded) => {
     }
     // Retreive the data form the drag source
     const control = JSON.parse(event.dataTransfer.getData('application/json'));
-
     // invoke the parents passed in callback prop
     onControlAdded(row, control);
     return true;

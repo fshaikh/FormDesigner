@@ -1,0 +1,15 @@
+.list {
+    display: flex;
+    cursor: pointer;
+    width: 90%;
+}
+
+.item{
+    flex-grow: 0.5;
+}
+
+.itemText{
+    flex-grow: 1;
+    padding: 10px;
+    font-weight:bold;
+}

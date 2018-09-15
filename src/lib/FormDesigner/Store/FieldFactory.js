@@ -1,5 +1,5 @@
 import ControlTypesEnum from '../Common/Models/ControlTypesEnum'; 
-import fieldValues from './controlValues/field/fieldValues';
+import * as fieldValues from './controlValues/field/fieldValues';
 
 export const getControlSeed = (control) => {
     switch(control.base) {
@@ -13,7 +13,9 @@ export const getControlSeed = (control) => {
 };
 
 const getField = (field) => {
-    return {...field, ...fieldValues};
+
+
+    return {...field, ...fieldValues.commonFieldValues};
 };
 
 const getWidget = (widget) => {

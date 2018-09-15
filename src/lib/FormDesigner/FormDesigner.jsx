@@ -242,7 +242,6 @@ export default class FormDesigner extends React.Component {
         // {selection:{select: false, id:''}}
         this.setState((prevState) => {
             const select = {select: true, id: control.systemId, rowId: row.id};
-            console.log(select)
             return {
                 selection: Object.assign({}, prevState.selection,select)
             }
@@ -253,11 +252,18 @@ export default class FormDesigner extends React.Component {
      * Reducer function invoked when a onPropertyChange action is dispatched
      * @param {*} param0 
      */
-    onPropertyChange({row,control,value,name}) {
+    onPropertyChange({row,control,value,name, advanced}) {
+        console.log({row,control,value,name})
         this.setState((prevState) => {
+            var newControlField;
             // get the field first from the state
             var stateField = prevState.formDefinition.rows[row].fields[control.systemId];
-            var newControlField = Object.assign({}, stateField, {[name]: value});
+            if(advanced) {
+                var properties = Object.assign({}, stateField.properties, {[name] : value});
+                newControlField = Object.assign({}, stateField, {properties: properties});
+            }else{
+                newControlField = Object.assign({}, stateField, {[name]: value});
+            }
             var existingRow = prevState.formDefinition.rows[row];
             var controls = Object.assign({}, {...existingRow.fields}, {[stateField.systemId]: newControlField});
             var clonedRow = Object.assign({}, existingRow,{fields: controls});

@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import ShortTextIcon from '@material-ui/icons/Input';
+
 
 import styles from './Field.module.css'
 import {fieldIconMapping} from '../../../../Common/Components/Icons'

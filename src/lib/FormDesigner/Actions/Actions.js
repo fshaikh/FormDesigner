@@ -66,15 +66,16 @@ export const SelectControlAction = (row, control) => {
     };
 };
 
-export const PropertyChange = 'onPropertyChangel';
-export const PropertyChangeAction = (row, control, value, name) => {
+export const PropertyChange = 'onPropertyChange';
+export const PropertyChangeAction = (row, control, value, name, advanced = false) => {
     return {
         actionName: PropertyChange,
         payload: {
             row: row,
             control: control,
             value: value,
-            name: name
+            name: name,
+            advanced: advanced
         }
     };
 };

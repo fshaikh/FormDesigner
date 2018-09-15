@@ -1,6 +1,35 @@
-const fileValues = {
+import SystemTypes from '../../../Common/Models/SystemTypes'
+
+export const fileValues = {
     "multiple":true,
-    "allowedExtension":[]
+    "allowedExtensions":[],
+    "allowedSize":0
 };
 
-export default fileValues;
+export const getFieldMeta = () => {
+    return {
+        multiple: {
+            name: "multiple",
+            type: SystemTypes.boolean,
+            label: "Allow multiple uploads",
+            readOnly: false,
+            visible: true
+        },
+        allowedExtensions: {
+            name: "allowedExtensions",
+            type: SystemTypes.array,
+            label: "Allowed Extensions",
+            helpText:"Separate each extension by a comma. For eg: .jpg, .png",
+            readOnly: false,
+            visible: true
+        },
+        allowedSize: {
+            name: "allowedSize",
+            type: SystemTypes.number,
+            label: "Maximum Allowed Size",
+            helpText:"Specify in MB",
+            readOnly: false,
+            visible: true
+        }
+    }
+};

@@ -1,0 +1,11 @@
+.list {
+    border: 1px solid black;
+}
+
+.top{
+    display:flex;
+}
+
+.textField{
+    flex-grow:1;
+}

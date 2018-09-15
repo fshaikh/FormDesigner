@@ -1,57 +1,67 @@
 import FieldControlsEnum from '../Common/Models/FieldControlsEnum';
 import Strings from '../Strings/strings-en';
 import ControlTypesEnum from '../Common/Models/ControlTypesEnum';
-import longTextValues from './controlValues/field/longTextValues';
-import checkBoxValues from './controlValues/field/checkBoxValues';
-import multipleValues from './controlValues/field/multipleValues';
-import fileValues from './controlValues/field/fileValues';
+import * as longTextValues from './controlValues/field/longTextValues';
+import * as checkBoxValues from './controlValues/field/checkBoxValues';
+import * as multipleValues from './controlValues/field/multipleValues';
+import * as fileValues from './controlValues/field/fileValues';
+import * as fieldValues from './controlValues/field/fieldValues';
 
+const commonMeta = fieldValues.getFieldMeta();
 export const FieldControls = [
     {
         base: ControlTypesEnum.Field,
         type: FieldControlsEnum.ShortText,
         label: Strings.ShortText,
-        properties: {}
+        properties: {},
+        meta: commonMeta
     },
     {
         base: ControlTypesEnum.Field,
         type: FieldControlsEnum.LongText,
         label: Strings.LongText,
-        properties: longTextValues
+        properties: longTextValues.longTextValues,
+        meta: {...commonMeta, ...longTextValues.getFieldMeta()}
     },
     {
         base: ControlTypesEnum.Field,
         type: FieldControlsEnum.Checkbox,
         label: Strings.Checkbox,
-        properties: checkBoxValues
+        properties: checkBoxValues.checkBoxValues,
+        meta: {...commonMeta, ...checkBoxValues.getFieldMeta()}
     },
     {
         base: ControlTypesEnum.Field,
         type: FieldControlsEnum.Dropdown,
         label: Strings.Dropdown,
-        properties: multipleValues
+        properties: multipleValues.multipleValues,
+        meta: {...commonMeta, ...multipleValues.getFieldMeta()}
     },
     {
         base: ControlTypesEnum.Field,
         type: FieldControlsEnum.Radio,
         label: Strings.Radio,
-        properties: multipleValues
+        properties: multipleValues.multipleValues,
+        meta: {...commonMeta, ...multipleValues.getFieldMeta()}
     },
     {
         base: ControlTypesEnum.Field,
         type: FieldControlsEnum.File,
         label: Strings.File,
-        properties: fileValues
+        properties: fileValues.fileValues,
+        meta: {...commonMeta, ...fileValues.getFieldMeta()}
     },
     {
         base: ControlTypesEnum.Field,
         type: FieldControlsEnum.Email,
-        label: Strings.Email
+        label: Strings.Email,
+        meta: commonMeta
     },
     {
         base: ControlTypesEnum.Field,
         type: FieldControlsEnum.Number,
-        label: Strings.Number
+        label: Strings.Number,
+        meta: commonMeta
     }
 ];
 

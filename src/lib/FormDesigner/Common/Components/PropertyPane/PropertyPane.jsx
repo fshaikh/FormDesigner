@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+
 
 import CellControl from './CellControl';
 
@@ -38,11 +38,11 @@ const PropertyPane = (props) => {
                     return (
                         <TableRow key={row.id}>
                             <TableCell>
-                                {row.name}
+                                {row.meta.label}
                             </TableCell>
                             <TableCell>
                                 <CellControl value={row.value}
-                                             type={row.type}
+                                             type={row.meta.type}
                                              onPropertyChange={(value) => props.onPropertyChange(row.name, value)} />
                             </TableCell>
                         </TableRow>
@@ -60,10 +60,11 @@ PropertyPane.propTypes = {
             value: PropTypes.oneOfType([
                 PropTypes.string,
                 PropTypes.bool,
-                PropTypes.number
+                PropTypes.number,
+                PropTypes.array
             ]).isRequired,
-            type: PropTypes.string.isRequired,
-            id: PropTypes.string.isRequired
+            id: PropTypes.string.isRequired,
+            meta: PropTypes.object.isRequired
         })).isRequired,
     columns: PropTypes.array.isRequired,
     onPropertyChange: PropTypes.func.isRequired

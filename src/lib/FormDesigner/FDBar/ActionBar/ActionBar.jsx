@@ -16,7 +16,6 @@ import PublishIcon from '@material-ui/icons/CloudUpload'
   * Lib specific imports
 */
 import FormDesignerContext from '../../Store/FormDesignerContext'
-import ActionButton from './ActionButton/ActionButton';
 import * as Actions from '../../Actions/Actions';
 import IconedButton from '../../Common/Components/IconButton/IconedButton';
 import styles from './ActionBar.module.css'

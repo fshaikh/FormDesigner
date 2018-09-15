@@ -3,6 +3,7 @@ import React from 'react';
 import TabbedContainer from '../../Common/Components/TabbedContainer/TabbedContainer'
 import EmptyComponent from '../../Common/Components/EmptyComponent';
 import CommonPropertyPane from './FieldPropertyPane/CommonPropertyPane';
+import AdvancedPropertyPane from './FieldPropertyPane/AdvancedPropertyPane'
 import FormDesignerContext from '../../Store/FormDesignerContext';
 import * as Actions from '../../Actions/Actions';
 
@@ -23,7 +24,8 @@ const FormDesignerRightBar = () => {
                         },
                         {
                             label: context.strings.Advanced,
-                            component: <EmptyComponent message='Coming soon' />
+                            component: <AdvancedPropertyPane control={selectedControl}
+                                                             onPropertyChange={(name, control,value)=> context.eventEmitter.dispatch(Actions.PropertyChangeAction(context.state.selection.rowId,control,value,name, true))} />
                         },
                         {
                             label: context.strings.Validators,
