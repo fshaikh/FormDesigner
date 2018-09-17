@@ -16,9 +16,11 @@ const Strings = {
     Dropdown: 'Drop down',
     Checkbox: 'Checkbox',
     Radio: 'Radio',
+    Property:'Property',
     Common: 'Common',
     Advanced: 'Advanced',
     Validators: 'Validators',
+    Validator: 'Validator',
     EditFormPropertiesTitle: 'Edit Form Properties',
     EditFormPropertiesTitleField: 'Title',
     EditFormPropertiesDescription: 'Description',
@@ -29,8 +31,12 @@ const Strings = {
     ClassNames: 'Class Name(s)',
     ClassNamesHintText: 'Separate the class names by a space',
     SaveAndClose: 'Save and Close',
-    Cancel: 'Cancel'
-
+    Cancel: 'Cancel',
+    Required: 'Required',
+    MinLength: 'Minimum Length',
+    MaxLength: 'Maximum Length',
+    AddValidator: 'Add Validator',
+    SelectValidator: 'Select Validator'
 };
 
 export default Strings;

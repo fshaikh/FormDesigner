@@ -3,7 +3,8 @@ const SystemTypes = {
     number: "Number",
     array: "Array",
     object: "Object",
-    boolean: "Boolean"
+    boolean: "Boolean",
+    complex: 'Complex'
 };
 
 export default SystemTypes;

@@ -80,6 +80,19 @@ export const PropertyChangeAction = (row, control, value, name, advanced = false
     };
 };
 
+export const ValidatorChange = 'onValidatorChange';
+export const ValidatorChangeAction = (row, control, value, name) => {
+    return {
+        actionName: ValidatorChange,
+        payload: {
+            row: row,
+            control: control,
+            value: value,
+            name: name
+        }
+    };
+};
+
 export const DeleteRow = 'onDeleteRow';
 export const DeleteRowAction = (row) => {
     return {

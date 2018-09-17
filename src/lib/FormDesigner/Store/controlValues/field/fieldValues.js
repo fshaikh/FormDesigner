@@ -27,6 +27,9 @@ export const getFieldMeta = () => {
         validators: {
             visible: false
         },
+        validValidators: {
+            visible: false
+        },
         systemId: {
             name: "systemId",
             type: SystemTypes.string,

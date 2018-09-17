@@ -11,6 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 
 import CellControl from './CellControl';
+import styles from './PropertyPane.module.css';
 
 const PropertyPane = (props) => {
     const CustomTableCell = withStyles(theme => ({
@@ -36,13 +37,17 @@ const PropertyPane = (props) => {
                 <TableBody>
                     {props.rows.map(row => {
                     return (
-                        <TableRow key={row.id}>
-                            <TableCell>
-                                {row.meta.label}
+                        <TableRow className={styles.row} key={row.id} >
+                            <TableCell onClick={(event) => {
+                                if(props.onRowSelect){
+                                    props.onRowSelect(row);
+                                }
+                            }}>
+                                {row.label}
                             </TableCell>
                             <TableCell>
                                 <CellControl value={row.value}
-                                             type={row.meta.type}
+                                             type={row.type}
                                              onPropertyChange={(value) => props.onPropertyChange(row.name, value)} />
                             </TableCell>
                         </TableRow>
@@ -64,11 +69,14 @@ PropertyPane.propTypes = {
                 PropTypes.array
             ]).isRequired,
             id: PropTypes.string.isRequired,
-            meta: PropTypes.object.isRequired
+            label: PropTypes.string.isRequired,
+            type: PropTypes.string.isRequired
         })).isRequired,
     columns: PropTypes.array.isRequired,
-    onPropertyChange: PropTypes.func.isRequired
+    onPropertyChange: PropTypes.func.isRequired,
+    onRowSelect: PropTypes.func
 };
+
 
 export default PropertyPane;
 

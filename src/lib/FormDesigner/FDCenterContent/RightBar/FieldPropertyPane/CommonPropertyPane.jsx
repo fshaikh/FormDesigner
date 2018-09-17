@@ -14,7 +14,8 @@ const CommonPropertyPane = ({control , onPropertyChange}) => {
                                         name: key,
                                         value: control[key],
                                         id: `${id}-${key}`,
-                                        meta: control.meta[key]
+                                        label: control.meta[key].label,
+                                        type: control.meta[key].type
                                     }
                         });   
     return (   

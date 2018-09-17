@@ -72,6 +72,7 @@ export default class FormDesigner extends React.Component {
         this.onAddControl = this.onAddControl.bind(this);
         this.onSelectControl = this.onSelectControl.bind(this);
         this.onPropertyChange = this.onPropertyChange.bind(this);
+        this.onValidatorChange = this.onValidatorChange.bind(this);
         this.onDeleteRow = this.onDeleteRow.bind(this);
         this.onEditFormProperties = this.onEditFormProperties.bind(this);
     }
@@ -88,6 +89,7 @@ export default class FormDesigner extends React.Component {
         this.eventEmitter.on(Actions.AddControl, this.onAddControl);
         this.eventEmitter.on(Actions.SelectControl, this.onSelectControl);
         this.eventEmitter.on(Actions.PropertyChange, this.onPropertyChange);
+        this.eventEmitter.on(Actions.ValidatorChange, this.onValidatorChange);
         this.eventEmitter.on(Actions.DeleteRow, this.onDeleteRow);
         this.eventEmitter.on(Actions.EditFormProperties, this.onEditFormProperties);
     }
@@ -200,7 +202,9 @@ export default class FormDesigner extends React.Component {
      * @param {*} event 
      */
     onSave(event) {
-        console.log(this.state);
+        if(this.props.onSave){
+            this.props.onSave(this.state.formDefinition);
+        }
     }
 
     /**
@@ -253,7 +257,6 @@ export default class FormDesigner extends React.Component {
      * @param {*} param0 
      */
     onPropertyChange({row,control,value,name, advanced}) {
-        console.log({row,control,value,name})
         this.setState((prevState) => {
             var newControlField;
             // get the field first from the state
@@ -264,6 +267,25 @@ export default class FormDesigner extends React.Component {
             }else{
                 newControlField = Object.assign({}, stateField, {[name]: value});
             }
+            var existingRow = prevState.formDefinition.rows[row];
+            var controls = Object.assign({}, {...existingRow.fields}, {[stateField.systemId]: newControlField});
+            var clonedRow = Object.assign({}, existingRow,{fields: controls});
+            return {
+                formDefinition: Object.assign(
+                                              {},
+                                              prevState.formDefinition,
+                                              {rows: Object.assign({}, {...prevState.formDefinition.rows},{[row]: clonedRow})}
+                                            )
+            };
+        });
+    }
+
+    onValidatorChange({row,control,value,name}){
+        this.setState((prevState) => {
+            // get the field first from the state
+            var stateField = prevState.formDefinition.rows[row].fields[control.systemId];
+            var validators = Object.assign({}, stateField.validators, {[name] : value});
+            var newControlField = Object.assign({}, stateField, {validators: validators});
             var existingRow = prevState.formDefinition.rows[row];
             var controls = Object.assign({}, {...existingRow.fields}, {[stateField.systemId]: newControlField});
             var clonedRow = Object.assign({}, existingRow,{fields: controls});
