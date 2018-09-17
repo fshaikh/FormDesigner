@@ -15,7 +15,6 @@ import Select from '@material-ui/core/Select';
  * Lib-specific imports
  */
 import DialogComponent from '../../../../Common/Components/Dialog/DialogComponent';
-import Form from '../../../../../../../node_modules/@reversecurrent/react-form-meta/Form'
 import * as LocalizationService from '../../../../Strings/LocalizationService';
 import FieldControlsEnum from '../../../../Common/Models/FieldControlsEnum';
 import styles from './ValidatorForm.module.css'

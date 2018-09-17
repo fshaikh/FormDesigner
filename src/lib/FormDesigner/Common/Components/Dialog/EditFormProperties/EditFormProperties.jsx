@@ -11,7 +11,7 @@ import DialogComponent from '../DialogComponent';
 import FormDesignerContext from '../../../../Store/FormDesignerContext';
 import * as Actions from '../../../../Actions/Actions';
 import FieldControlsEnum from '../../../../Common/Models/FieldControlsEnum';
-import Form from '../../../../../../../node_modules/@reversecurrent/react-form-meta/Form'
+import Form from '@reversecurrent/react-form-meta/Form'
 
 /**
  * Represents Edit Form Properties component. Receives the form data and

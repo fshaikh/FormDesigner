@@ -1,5 +1,5 @@
 import React from 'react'
-import EventEmitter from '../../node_modules/@reversecurrent/eventemitter/EventEmitter';
+import EventEmitter from '@reversecurrent/eventemitter/EventEmitter';
 import Strings from '../lib/FormDesigner/Strings/strings-en';
 import FormDesignerContext from '../lib/FormDesigner/Store/FormDesignerContext';
 

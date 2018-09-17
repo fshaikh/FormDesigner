@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  * Lib specific imports
  */
 import FormDesignerContext from './Store/FormDesignerContext';
-import EventEmitter from '../../../node_modules/@reversecurrent/eventemitter/EventEmitter'
+import EventEmitter from '@reversecurrent/eventemitter/EventEmitter'
 import * as Actions from './Actions/Actions';
 import Strings from './Strings/strings-en';
 import FormDesignerAppBar from './FDBar/FormDesignerAppBar';
@@ -25,7 +25,7 @@ import styles from './FormDesigner.module.css';
 /**
  * Form Designer container component
  */
-export default class FormDesigner extends React.Component {
+class FormDesigner extends React.Component {
     /**
      * Initializes a new instance of FormDesigner
      * @param {*} props 
@@ -426,3 +426,5 @@ export default class FormDesigner extends React.Component {
                       rows[selection.rowId] == null ? null : rows[selection.rowId].fields[selection.id]
     }
 }
+
+export {FormDesigner};
