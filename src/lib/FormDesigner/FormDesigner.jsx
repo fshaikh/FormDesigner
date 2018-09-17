@@ -56,6 +56,7 @@ export default class FormDesigner extends React.Component {
                                                     rowId:'',
                                                     getSelectedControl: this.getSelectedControl.bind(this)
                                                   },
+                                        isDirty: false,
                                         showEditForm: false
                                     });
         this.rowIndex = 0;
@@ -65,6 +66,7 @@ export default class FormDesigner extends React.Component {
      * Bind event handlers
      */
     bindEventHandlers() {
+        this.onChanges = this.onChanges.bind(this);
         this.onFormNameChange = this.onFormNameChange.bind(this);
         this.addRow = this.addRow.bind(this);
         this.onSave = this.onSave.bind(this);
@@ -82,16 +84,17 @@ export default class FormDesigner extends React.Component {
      */
     setupDispatcher() {
         this.eventEmitter = new EventEmitter('Form Designer',true);
-        this.eventEmitter.on(Actions.FormNameChange, this.onFormNameChange);
-        this.eventEmitter.on(Actions.AddRow, this.addRow);
-        this.eventEmitter.on(Actions.Save, this.onSave);
+        this.eventEmitter.on(Actions.FormNameChange, this.onChanges(this.onFormNameChange));
+        this.eventEmitter.on(Actions.AddRow, this.onChanges(this.addRow));
         this.eventEmitter.on(Actions.ShowEditFormProperties, this.showEditFormProperties);
-        this.eventEmitter.on(Actions.AddControl, this.onAddControl);
+        this.eventEmitter.on(Actions.AddControl, this.onChanges(this.onAddControl));
         this.eventEmitter.on(Actions.SelectControl, this.onSelectControl);
-        this.eventEmitter.on(Actions.PropertyChange, this.onPropertyChange);
-        this.eventEmitter.on(Actions.ValidatorChange, this.onValidatorChange);
-        this.eventEmitter.on(Actions.DeleteRow, this.onDeleteRow);
-        this.eventEmitter.on(Actions.EditFormProperties, this.onEditFormProperties);
+        this.eventEmitter.on(Actions.PropertyChange, this.onChanges(this.onPropertyChange));
+        this.eventEmitter.on(Actions.ValidatorChange, this.onChanges(this.onValidatorChange));
+        this.eventEmitter.on(Actions.DeleteRow, this.onChanges(this.onDeleteRow));
+        this.eventEmitter.on(Actions.EditFormProperties, this.onChanges(this.onEditFormProperties));
+
+        this.eventEmitter.on(Actions.Save, this.onSave);
     }
 
     
@@ -173,11 +176,42 @@ export default class FormDesigner extends React.Component {
     }
 
     /**
+     * Higher order function which is invoked for evert change to form definition. Any dispatched action
+     * which causes the form to be dirty should be wrapped by this function.
+     * This allows us to do any common logic when the form is dirty
+     * @param {*Function} changeFunc - Function which causes the form to be dirty
+     */
+    onChanges(changeFunc) {
+        // Hold the 'this' context
+        let context = this;
+        // Bind the passed function to
+        changeFunc = changeFunc.bind(context);
+        // Return the wrapper function
+        return function() {
+            if(context.props.devMode){
+                console.log('Calling Change func:' + changeFunc)
+            }
+            // invoke the passed in change function
+            changeFunc(...arguments);
+            // set state to make the form dirty
+            context.setState({isDirty: true});
+        }
+    }
+
+    /**
      * Reducer function invoked when onFormNameChange action is dispatched
      * @param {*string} name - Form name
      */
     onFormNameChange(name) {
-        console.log(name);
+        this.setState((prevState) => {
+            return {
+                formDefinition: Object.assign(
+                                              {},
+                                              prevState.formDefinition,
+                                              {formName: name}
+                )
+            };
+        });
     }
 
     /**
@@ -205,6 +239,12 @@ export default class FormDesigner extends React.Component {
         if(this.props.onSave){
             this.props.onSave(this.state.formDefinition);
         }
+        this.setState((prevState) => {
+            return {
+                isDirty: false
+            };
+            
+        });
     }
 
     /**
@@ -221,6 +261,7 @@ export default class FormDesigner extends React.Component {
      * @param {*} field - Control to be added to the row in the form
      */
     onAddControl({row, control}) {
+        console.log(row,control)
         // Construct a new field/widget object based on the type
         const newControlField = this.getNewControl(control);
         // set state

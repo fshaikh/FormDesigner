@@ -36,7 +36,8 @@ const Strings = {
     MinLength: 'Minimum Length',
     MaxLength: 'Maximum Length',
     AddValidator: 'Add Validator',
-    SelectValidator: 'Select Validator'
+    SelectValidator: 'Select Validator',
+    UnsavedChanges: 'You have unsaved changes'
 };
 
 export default Strings;

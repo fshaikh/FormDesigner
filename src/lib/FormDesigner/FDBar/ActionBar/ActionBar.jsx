@@ -7,7 +7,6 @@ import React from 'react';
  * Material UI imports
  */
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import SaveIcon from '@material-ui/icons/Save';
 import EditIcon from '@material-ui/icons/Edit';
 import PreviewIcon from '@material-ui/icons/RemoveRedEyeRounded';
 import PublishIcon from '@material-ui/icons/CloudUpload'
@@ -19,8 +18,8 @@ import FormDesignerContext from '../../Store/FormDesignerContext'
 import * as Actions from '../../Actions/Actions';
 import IconedButton from '../../Common/Components/IconButton/IconedButton';
 import styles from './ActionBar.module.css'
-
-
+import withBadge from '../../Common/Components/Badge/Badge';
+import SaveActionButton from './ActionButton/SaveActionButton';
 /**
  * Presentational component which acts as a container forall action buttons
  * @param {*object} props 
@@ -34,10 +33,8 @@ const ActionBar = (props) => {
                                           onClick={(event) => context.eventEmitter.dispatch(Actions.AddRowAction(event))}>
                                           <AddCircleIcon />
                             </IconedButton>
-                            <IconedButton label={context.strings.Save}
-                                          onClick={(event) => context.eventEmitter.dispatch(Actions.SaveAction(event))}>
-                                          <SaveIcon />
-                            </IconedButton>
+                            <SaveActionButton context={context} />
+                            
                             <IconedButton label={context.strings.EditFormProperties}
                                           onClick={(event) => context.eventEmitter.dispatch(Actions.ShowEditFormPropertiesAction(event))}>
                                           <EditIcon />
