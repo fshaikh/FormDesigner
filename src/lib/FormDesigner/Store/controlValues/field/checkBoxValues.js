@@ -1,6 +1,9 @@
 import SystemTypes from '../../../Common/Models/SystemTypes'
 
 export const checkBoxValues = {
+    "hintText": "",
+    "showLabel": true,
+    "readOnly": true,
     "checked": 0
 };
 

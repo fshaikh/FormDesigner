@@ -1,6 +1,9 @@
 import SystemTypes from '../../../Common/Models/SystemTypes'
 
 export const multipleValues = {
+    "hintText": "",
+    "showLabel": true,
+    "readOnly": true,
     "enum":[],
     "enumNames":[]
 };

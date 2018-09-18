@@ -16,6 +16,7 @@ const Strings = {
     Dropdown: 'Drop down',
     Checkbox: 'Checkbox',
     Radio: 'Radio',
+    Label: 'Label',
     Property:'Property',
     Common: 'Common',
     Advanced: 'Advanced',

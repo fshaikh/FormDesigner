@@ -6,6 +6,7 @@ import PropertyPane from '../../../Common/Components/PropertyPane/PropertyPane'
 
 const AdvancedPropertyPane = ({control , onPropertyChange}) => {
     const id = control.systemId;
+    console.log(control)
     const rows = Object.keys(control.properties)
                         .map((key) => {
                               return {

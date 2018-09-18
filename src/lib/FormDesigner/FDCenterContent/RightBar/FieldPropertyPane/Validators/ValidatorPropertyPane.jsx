@@ -31,10 +31,11 @@ export default class ValidatorPropertyPane extends React.Component {
             <div>
                 <AppBar position="static" color="default">
                     <Toolbar>
-                        <IconedButton label={LocalizationService.getStrings().AddValidator}
+                        {Object.keys(this.props.control.validValidators).length > 0 ? <IconedButton label={LocalizationService.getStrings().AddValidator}
                                       onClick={(event) => this.setState({showValidatorForm: true})}>
                                     <AddCircleIcon />
-                        </IconedButton>
+                        </IconedButton> : ''}
+                        
                     </Toolbar>
                 </AppBar>
                 <PropertyPane rows={this.getRows()}

@@ -6,7 +6,8 @@ const FieldControlsEnum = {
     Dropdown: 'DropDown',
     Radio: 'Radio',
     Checkbox: 'CheckBox',
-    File: 'File'
+    File: 'File',
+    Label: 'Label'
 };
 
 export default FieldControlsEnum;

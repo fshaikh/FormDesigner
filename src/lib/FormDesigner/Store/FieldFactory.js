@@ -13,8 +13,6 @@ export const getControlSeed = (control) => {
 };
 
 const getField = (field) => {
-
-
     return {...field, ...fieldValues.commonFieldValues};
 };
 

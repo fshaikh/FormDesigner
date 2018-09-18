@@ -1,6 +1,10 @@
 import SystemTypes from '../../../Common/Models/SystemTypes'
 
 export const fileValues = {
+    "hintText": "",
+    "placeholder": "",
+    "showLabel": true,
+    "readOnly": true,
     "multiple":true,
     "allowedExtensions":[],
     "allowedSize":0

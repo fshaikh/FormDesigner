@@ -6,6 +6,7 @@ import CheckboxIcon from '@material-ui/icons/CheckBox';
 import EmailIcon from '@material-ui/icons/Email';
 import FileIcon from '@material-ui/icons/AttachFile';
 import RadioIcon from '@material-ui/icons/RadioButtonChecked';
+import LabelIcon from '@material-ui/icons/Label';
 
 import FieldControlsEnum from '../Models/FieldControlsEnum';
 
@@ -18,5 +19,6 @@ export const fieldIconMapping = {
     [FieldControlsEnum.File]: FileIcon,
     [FieldControlsEnum.Number]: ShortTextIcon,
     [FieldControlsEnum.Radio]: RadioIcon,
+    [FieldControlsEnum.Label]: LabelIcon
 };
 

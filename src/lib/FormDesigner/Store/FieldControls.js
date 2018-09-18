@@ -1,6 +1,7 @@
 import FieldControlsEnum from '../Common/Models/FieldControlsEnum';
 import Strings from '../Strings/strings-en';
 import ControlTypesEnum from '../Common/Models/ControlTypesEnum';
+import * as shortTextValues from './controlValues/field/shortTextValues';
 import * as longTextValues from './controlValues/field/longTextValues';
 import * as checkBoxValues from './controlValues/field/checkBoxValues';
 import * as multipleValues from './controlValues/field/multipleValues';
@@ -16,7 +17,7 @@ export const FieldControls = [
         base: ControlTypesEnum.Field,
         type: FieldControlsEnum.ShortText,
         label: Strings.ShortText,
-        properties: {},
+        properties: shortTextValues.default,
         meta: commonMeta,
         validValidators:{
             [ValidatorEnum.Required] : {...ControlValidators[ValidatorEnum.Required]},
@@ -93,7 +94,17 @@ export const FieldControls = [
         validValidators:{
             [ValidatorEnum.Required] : {...ControlValidators[ValidatorEnum.Required]}
         }
-    }
+    },
+    {
+        base: ControlTypesEnum.Field,
+        type: FieldControlsEnum.Label,
+        label: Strings.Label,
+        properties: {},
+        meta: commonMeta,
+        validValidators:{
+            
+        }
+    },
 ];
 
 export const normalizedFieldControls = FieldControls.reduce((accumulator, item) => {

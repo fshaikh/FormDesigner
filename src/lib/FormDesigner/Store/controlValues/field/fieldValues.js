@@ -3,10 +3,6 @@ import SystemTypes from '../../../Common/Models/SystemTypes'
 export const commonFieldValues = {
     "id": "",
     "name": "",
-    "hintText": "",
-    "placeholder": "",
-    "showLabel": true,
-    "readOnly": true,
     "validators": []
 };
 
