@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import SystemTypes from '../../../Common/Models/SystemTypes';
 import Checkbox from '@material-ui/core/Checkbox';
-import ArrayField from '../ArrayField/ArrayField'
+import ArrayField from '../ArrayField/ArrayField';
+import Choice from '../Choice/Choice';
 
 const CellControl = (props) => {
      var Control = getControl(props);
@@ -26,6 +27,9 @@ const getControl = (props) => {
             case SystemTypes.array:
                 return <ArrayField values={props.value} 
                                    onChange={(values) => props.onPropertyChange(values)}/>
+            case SystemTypes.choice:
+                return <Choice selectedValue={props.value} values={props.values}
+                               onChange={(values) => props.onPropertyChange(values) }/>
             default:
                 return InputField;
         }
@@ -40,6 +44,7 @@ CellControl.propTypes = {
         PropTypes.number,
         PropTypes.array
     ]).isRequired,
+    values: PropTypes.array,
     type: PropTypes.string.isRequired,
     onPropertyChange: PropTypes.func.isRequired
 };

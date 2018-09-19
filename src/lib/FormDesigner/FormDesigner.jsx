@@ -16,6 +16,7 @@ import FormDesignerCenterContent from './FDCenterContent/FormDesignerCenterConte
 import * as IdService from './Common/Services/IdService';
 import * as FieldFactory from './Store/FieldFactory';
 import EditFormProperties from './Common/Components/Dialog/EditFormProperties/EditFormProperties';
+import RowType from './Common/Models/RowType';
 
 /**
  * Import css using CSS modules
@@ -261,14 +262,13 @@ class FormDesigner extends React.Component {
      * @param {*} field - Control to be added to the row in the form
      */
     onAddControl({row, control}) {
-        console.log(row,control)
         // Construct a new field/widget object based on the type
         const newControlField = this.getNewControl(control);
         // set state
         this.setState((prevState) => {
             var existingRow = prevState.formDefinition.rows[row.id];
             var controls = Object.assign({}, {...existingRow.fields}, newControlField);
-            var clonedRow = Object.assign({}, existingRow,{fields: controls});
+            var clonedRow = Object.assign({}, existingRow,{fields: controls, rowType: this.getRowType(controls)});
             return {
                 formDefinition: Object.assign(
                                               {},
@@ -310,7 +310,7 @@ class FormDesigner extends React.Component {
             }
             var existingRow = prevState.formDefinition.rows[row];
             var controls = Object.assign({}, {...existingRow.fields}, {[stateField.systemId]: newControlField});
-            var clonedRow = Object.assign({}, existingRow,{fields: controls});
+            var clonedRow = Object.assign({}, existingRow,{fields: controls, rowType: this.getRowType(controls)});
             return {
                 formDefinition: Object.assign(
                                               {},
@@ -424,6 +424,16 @@ class FormDesigner extends React.Component {
         return selection.id === '' ?
                       null :
                       rows[selection.rowId] == null ? null : rows[selection.rowId].fields[selection.id]
+    }
+
+    getRowType(controls) {
+        const keys = Object.keys(controls);
+        if(keys.length === 2){
+            return RowType.Both;
+        }
+        if(keys.length === 1){
+            return controls[keys[0]].layoutType;
+        }
     }
 }
 

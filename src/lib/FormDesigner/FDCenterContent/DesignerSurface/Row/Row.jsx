@@ -8,6 +8,7 @@ import styles from './Row.module.css';
 import EmptyRowView from './EmptyRowView';
 import FieldsPlaceholder from './Field/FieldsPlaceholder';
 import IconedButton from '../../../Common/Components/IconButton/IconedButton';
+import RowType from '../../../Common/Models/RowType';
 
 const Row = ({row, onControlAdded , onRowDeleted}) => {
     return (
@@ -69,7 +70,25 @@ const handleOnDrop = (event, row, onControlAdded) => {
         2. Row has a field whose layout type is span - TBD
  */
 const allowDrop = (row) => {
-    return isRowEmpty(row);
+    // if row is empty i.e has no fields, drop is allowed
+    var isEmpty = isRowEmpty(row);
+    if(isEmpty){
+        return true;
+    }
+    var fields = Object.keys(row.fields);
+
+    // if row has 2 fields, drop is not allowed
+    if(fields.length === 2) {
+        return false;
+    }
+    // If row has one field with type === span, drop is now allowed
+    if(fields.length === 1){
+        if(row.fields[fields[0]].layoutType === RowType.Span){
+            return false;
+        }
+    }
+
+    return true;
 }
 
 /**

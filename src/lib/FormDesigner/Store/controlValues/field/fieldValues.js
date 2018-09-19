@@ -1,12 +1,16 @@
-import SystemTypes from '../../../Common/Models/SystemTypes'
+import SystemTypes from '../../../Common/Models/SystemTypes';
+import RowType from '../../../Common/Models/RowType';
+import * as LocalizationService from '../../../Strings/LocalizationService';
 
 export const commonFieldValues = {
     "id": "",
     "name": "",
+    "layoutType": RowType.Span,
     "validators": []
 };
 
 export const getFieldMeta = () => {
+    const strings = LocalizationService.getStrings();
     return {
         base: {
             name: "base",
@@ -88,6 +92,16 @@ export const getFieldMeta = () => {
             label: "Show Label",
             readOnly: false,
             visible: true
+        },
+        layoutType: {
+            name: "layoutType",
+            type: SystemTypes.choice,
+            label: "Layout",
+            readOnly: false,
+            visible: true,
+            values:[{key: RowType.Left, value: strings.Left},
+                    {key: RowType.Right, value: strings.Right},
+                    {key: RowType.Span, value: strings.Span}] 
         }
     }
 };

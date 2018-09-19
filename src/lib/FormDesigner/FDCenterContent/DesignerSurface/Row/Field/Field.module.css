@@ -2,11 +2,26 @@
     height: 40px;
     cursor: pointer;
     color: grey;
+    flex-grow: 1;
+}
+
+.span {
+    flex-grow: 1;
 }
 
 .selected {
     composes: themeColor from '../../../../Styles/_color.css';
     color: black;
+}
+
+.left {
+    flex-grow: 0.5;
+    align-self: flex-start;
+}
+
+.right{
+    flex-grow: 0.5;
+    align-self: flex-end;
 }
 
 .normal {

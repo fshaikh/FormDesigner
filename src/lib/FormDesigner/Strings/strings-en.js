@@ -38,7 +38,13 @@ const Strings = {
     MaxLength: 'Maximum Length',
     AddValidator: 'Add Validator',
     SelectValidator: 'Select Validator',
-    UnsavedChanges: 'You have unsaved changes'
+    UnsavedChanges: 'You have unsaved changes',
+    Left: "Left",
+    Right: "Right",
+    Span: "Span",
+    Both: "Both",
+    PropertyName: 'Property Name',
+    PropertyValue: 'Property Value'
 };
 
 export default Strings;

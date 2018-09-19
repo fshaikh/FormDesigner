@@ -4,7 +4,8 @@ const SystemTypes = {
     array: "Array",
     object: "Object",
     boolean: "Boolean",
-    complex: 'Complex'
+    complex: 'Complex',
+    choice: 'Choice'
 };
 
 export default SystemTypes;

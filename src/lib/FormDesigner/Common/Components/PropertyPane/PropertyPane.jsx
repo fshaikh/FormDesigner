@@ -47,6 +47,7 @@ const PropertyPane = (props) => {
                             </TableCell>
                             <TableCell>
                                 <CellControl value={row.value}
+                                             values={row.values}
                                              type={row.type}
                                              onPropertyChange={(value) => props.onPropertyChange(row.name, value)} />
                             </TableCell>
