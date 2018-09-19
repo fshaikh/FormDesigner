@@ -164,9 +164,7 @@ class FormDesigner extends React.Component {
                         <FormDesignerAppBar />
                         <FormDesignerCenterContent />
                   
-                    <div className={styles.fdFooter}>
-                        FD Footer goes here
-                    </div>
+                    
                     <EditFormProperties open={this.state.showEditForm}
                                         formData={this.state.formDefinition.formProperties}
                                         showFullScreen ={true}
