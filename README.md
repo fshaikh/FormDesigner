@@ -37,5 +37,5 @@ render((
 ), document.getElementById("app"));
 ```
 
-![](https://youtu.be/wPjNyf_8Zl4)
+![](https://github.com/fshaikh/formDesigner/blob/master/resources/Screencast.gif)
 
