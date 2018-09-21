@@ -27,7 +27,6 @@ const FormRenderer = require('@reversecurrent/formrenderer/FormRenderer').FormRe
  * @param {*} props 
  */
 const EditFormProperties = (props) => {
-    console.log(FormRenderer)
     return(
         <FormDesignerContext.Consumer>
             {(context) => {

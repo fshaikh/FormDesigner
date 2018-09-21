@@ -267,13 +267,15 @@ class FormDesigner extends React.Component {
             var existingRow = prevState.formDefinition.rows[row.id];
             var controls = Object.assign({}, {...existingRow.fields}, newControlField);
             var clonedRow = Object.assign({}, existingRow,{fields: controls, rowType: this.getRowType(controls)});
-            return {
+            const newState =  {
                 formDefinition: Object.assign(
                                               {},
                                               prevState.formDefinition,
                                               {rows: Object.assign({}, {...prevState.formDefinition.rows},{[row.id]: clonedRow})}
-                                            )
+                                            ),
+                selection : this.getSelectControlState(prevState, row, control, Object.keys(newControlField)[0])
             };
+            return newState;
         });
     }
 
@@ -284,11 +286,13 @@ class FormDesigner extends React.Component {
     onSelectControl({row, control}) {
         // {selection:{select: false, id:''}}
         this.setState((prevState) => {
-            const select = {select: true, id: control.systemId, rowId: row.id};
-            return {
-                selection: Object.assign({}, prevState.selection,select)
-            }
+            return {selection : this.getSelectControlState(prevState, row, control)}
         });
+    }
+
+    getSelectControlState = (prevState, row, control, id) => {
+        const select = {select: true, id: id == null ? control.systemId : id, rowId: row.id};
+        return Object.assign({}, prevState.selection, select);
     }
 
     /**
