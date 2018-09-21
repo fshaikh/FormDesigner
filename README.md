@@ -9,6 +9,7 @@ A [React](http://facebook.github.io/react/) component for an intuitive, drag-and
     (#as-a-npm-based-project-dependency)
 - [Usage](#usage)
     - [New Mode](#new-mode)
+    - [Edit Mode](#edit-mode)
 
 
 ## Installation
@@ -32,10 +33,24 @@ import '@reversecurrent/formdesigner/FormDesigner.css'
 import FormDesigner from '@reversecurrent/formdesigner/FormDesigner'.FormDesigner
 
 render((
-  <FormDesigner formDefinition={this.schema} 
-                onSave = { (formDefinition) => console.log(formDefinition)} />
+  <FormDesigner onSave = { (formDefinition) => console.log(formDefinition)} />
 ), document.getElementById("app"));
 ```
 
 ![](https://github.com/fshaikh/formDesigner/blob/master/resources/Screencast.gif)
+
+### Edit Mode
+```jsx
+import React, { Component } from "react";
+import { render } from "react-dom";
+
+import '@reversecurrent/formdesigner/FormDesigner.css'
+import FormDesigner from '@reversecurrent/formdesigner/FormDesigner'.FormDesigner
+
+render((
+  <FormDesigner formDefinition={schema} onSave = { (formDefinition) => console.log(formDefinition)} />
+), document.getElementById("app"));
+```
+
+![](https://github.com/fshaikh/formDesigner/blob/master/resources/EditMode.jpg)
 
