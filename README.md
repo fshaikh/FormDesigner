@@ -52,5 +52,5 @@ render((
 ), document.getElementById("app"));
 ```
 
-![](https://github.com/fshaikh/formDesigner/blob/master/resources/EditMode.jpg)
+![](https://github.com/fshaikh/FormDesigner/blob/master/resources/EditMode.JPG)
 
